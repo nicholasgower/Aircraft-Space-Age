@@ -1,3 +1,5 @@
+flib_data_util=require("__flib__.data-util")
+
 local ICONPATH = "__Aircraft-space-age__/graphics/icons/"
 local ENTITYPATH = "__Aircraft-space-age__/graphics/entity/"
 
@@ -36,6 +38,10 @@ local function airplaneAnimation(name)
       }
     }
   }
+  if mods["AircraftRealism"] then --Moves shadows closer to aircraft sprite when "AircraftRealism" is active, creating illusion of aircraft being closer to the ground 
+    anim.layers[2].shift=util.by_pixel(0, 0)
+    anim.layers[2].hr_version.shift=util.by_pixel(0, 0)
+  end
   addcommonanimlines(anim)
   return anim
 end
@@ -118,7 +124,7 @@ local carsounds = {
   match_speed_to_activity = true,
 }
 
----add in one function all the common parameteres between aircrafts
+---add in one function all the common parameters between aircrafts
 local function add_recurrent_params(craft)
   craft.icon_size = 64
   craft.flags = {"placeable-neutral", "player-creation", "placeable-off-grid"}
@@ -131,12 +137,15 @@ local function add_recurrent_params(craft)
   -- Original
   --craft.collision_mask = getCollisionMask() -- Updated collision mask
   -- added due to 2.0 modding API changes
-  craft.collision_mask = { layers = {} }
+  if not mods["AircraftRealism"] then
+    craft.collision_mask = { layers = {} } 
+  end
+  
   craft.selection_box = {{-0.9, -1.3}, {0.9, 1.3}}
   craft.selection_priority = 60
   craft.render_layer = "air-object"
   craft.final_render_layer = "air-object"
-  if settings.startup["use-old-stats"].value==true then
+  if settings.startup["disable-tank-controls"].value==false then
     craft.tank_driving = true
   else
     craft.tank_driving = false
@@ -149,6 +158,7 @@ local function add_recurrent_params(craft)
   craft.open_sound = { filename = "__base__/sound/car-door-open.ogg", volume = 0.7 }
   craft.close_sound = { filename = "__base__/sound/car-door-close.ogg", volume = 0.7 }
   craft.mined_sound = {filename = "__core__/sound/deconstruct-large.ogg",volume = 0.8}
+  craft.energy_source.fuel_categories=data.raw["car"]["car"].energy_source.fuel_categories
   craft.create_ghost_on_death = false
   --craft.alert_icon_shift = {0,-1}
   craft.minimap_representation = {
@@ -165,6 +175,14 @@ local function add_recurrent_params(craft)
   }
   --craft.immune_to_tree_impacts = true --craft.immune_to_rock_impacts = true
   --craft.created_smoke = { smoke_name = "smoke" }
+  local fuel_multiplier=settings.startup["fuel-consumption-multiplier"].value
+  if  fuel_multiplier~= 1 then
+    local val,suffix=flib_data_util.get_energy_value(craft.consumption)
+    craft.consumption=val*fuel_multiplier .. suffix
+    craft.effectivity=craft.effectivity/fuel_multiplier
+  end
+  
+  
 end
 
 local function resist(type, decrease, percent)
@@ -174,6 +192,8 @@ local function resist(type, decrease, percent)
     percent = percent
   }
 end
+
+
 
 local gunship = { -- Gunship with Car sound
     type = "car",
@@ -195,22 +215,22 @@ local gunship = { -- Gunship with Car sound
       resist("acid",     60, 20),
     },
     --inventory_size = 30,
-    inventory_size = 5,
+    inventory_size = 30,
     guns = { "aircraft-machine-gun", "aircraft-rocket-launcher"},
     equipment_grid = "gunship-equipment-grid",
         --MOVEMENT
-    effectivity = 0.07,
+    effectivity = 0.7,
     braking_power = "450kW",
     energy_source = {
       type = "burner",
       fuel_inventory_size = 4,
       smoke = { smokedef(-16, 60, 38), smokedef(16, 60, 38) }
     },
-    --consumption = "650kW",
-    consumption = "45MW",
+    consumption = "650kW",
+    --consumption = "45MW",
     friction = 0.003,
     stop_trigger_speed = 0.2,
-    acceleration_per_energy = 0.1,
+    acceleration_per_energy = 0.35,
     breaking_speed = 0.09,
     rotation_speed = 0.01,
     weight = 750,
@@ -220,10 +240,10 @@ local gunship = { -- Gunship with Car sound
   }
 
 if settings.startup["use-old-stats"].value==true then
-    gunship.inventory_size = 30
-    gunship.effectivity=0.7
-    gunship.consumption = "650kW"
-    gunship.acceleration_per_energy = 0.35
+    --gunship.inventory_size = 30
+    --gunship.effectivity=0.7
+    --gunship.consumption = "650kW"
+    --gunship.acceleration_per_energy = 0.35
   end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -246,22 +266,22 @@ local cargo_plane = { -- Cargo Plane with Car sound
       resist("explosion", 2, 30),
       resist("acid",     60, 20),
     },
-    --inventory_size = 120,
-    inventory_size = 40,
+    inventory_size = 120,
+    
     guns = { "cargo-plane-machine-gun"},
         --MOVEMENT
-    effectivity = 0.1,
+    effectivity = 1,
     braking_power = "650kW",
     energy_source = {
       type = "burner",
       fuel_inventory_size = 10,
       smoke = { smokedef(0, 40, 36) }
     },
-    --consumption = "1250kW",
-    consumption = "85MW",
+    consumption = "1250kW",
+    --consumption = "85MW",
     friction = 0.01,
     stop_trigger_speed = 0.2,
-    acceleration_per_energy = 0.1,
+    acceleration_per_energy = 0.15,
     breaking_speed = 0.15,
     rotation_speed = 0.006,
     weight = 3500,
@@ -269,10 +289,10 @@ local cargo_plane = { -- Cargo Plane with Car sound
     trash_inventory_size=10,
   }
 if settings.startup["use-old-stats"].value==true then
-  cargo_plane.inventory_size = 120
-  cargo_plane.effectivity=1
-  cargo_plane.consumption = "1250kW"
-  cargo_plane.acceleration_per_energy=0.15
+  --cargo_plane.inventory_size = 120
+  --cargo_plane.effectivity=1
+  --cargo_plane.consumption = "1250kW"
+  --cargo_plane.acceleration_per_energy=0.15
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local jet = { -- Jet with Car sound
@@ -298,34 +318,36 @@ local jet = { -- Jet with Car sound
     guns = { "aircraft-machine-gun", "aircraft-rocket-launcher", "napalm-launcher"},
     equipment_grid = "jet-equipment-grid",
         --MOVEMENT
-    effectivity = 0.09,
+    effectivity = 0.9,
     braking_power = "2000kW",
     energy_source = {
       type = "burner",
       fuel_inventory_size = 8,
       smoke = { smokedef(0, 62, 38) }
     },
-    --consumption = "850kW",
-    consumption= "65MW", --All aircraft will have consumption multiplied by 100.
+    consumption = "850kW",
+    --consumption= "65MW", --All aircraft will have consumption multiplied by 100.
     friction = 0.001,
     stop_trigger_speed = 0.2,
-    acceleration_per_energy = 0.10,
+    acceleration_per_energy = 0.80,
     breaking_speed = 0.03,
     rotation_speed = 0.01,
     --weight = 50000,
-    weight = 2500,
+    weight = 500,
     allow_remote_driving=true,
     trash_inventory_size=10,
 
   }
 
 if settings.startup["use-old-stats"].value==true then
-    jet.inventory_size = 5
-    jet.effectivity=0.9
-    jet.consumption = "850kW"
-    jet.acceleration_per_energy=0.8
-    jet.weight=500
+    --jet.inventory_size = 5
+    --jet.effectivity=0.9
+    --jet.consumption = "850kW"
+    --jet.acceleration_per_energy=0.8
+    --jet.weight=500
   end
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local flying_fortress = { -- Flying Fortress with Car sound
     type = "car",
@@ -347,22 +369,22 @@ local flying_fortress = { -- Flying Fortress with Car sound
       resist("acid",     60, 20),
     },
     --inventory_size = 20,
-    inventory_size = 5,
+    inventory_size = 20,
     guns = { "flying-fortress-machine-gun", "aircraft-cannon", "flying-fortress-rocket-launcher"},
     equipment_grid = "flying-fortress-equipment-grid",
         --MOVEMENT
-    effectivity = 0.23,
+    effectivity = 2.3,
     braking_power = "850kW",
 	energy_source = {
       type = "burner",
       fuel_inventory_size = 8,
       smoke = { smokedef(0, 65, 38) }
     },
-    --consumption = "1850kW",
-    consumption = "130MW",
+    consumption = "1850kW",
+    --consumption = "130MW",
     friction = 0.015,
     stop_trigger_speed = 0.1,
-    acceleration_per_energy = 0.10,
+    acceleration_per_energy = 0.30,
     breaking_speed = 0.001,
     rotation_speed = 0.004,
     weight = 3000,
@@ -371,10 +393,9 @@ local flying_fortress = { -- Flying Fortress with Car sound
     
   }
 if settings.startup["use-old-stats"].value==true then
-    flying_fortress.inventory_size = 20
-    flying_fortress.effectivity=2.3
-    flying_fortress.consumption = "1850kW"
-    flying_fortress.acceleration_per_energy=0.30
+    --flying_fortress.inventory_size = 20
+    --flying_fortress.effectivity=2.3
+    --flying_fortress.acceleration_per_energy=0.30
   end
 
 
@@ -404,6 +425,81 @@ if mods["space-age"] and settings.startup["lock-surfaces-space-age"].value==true
       }
     }
   end
+end
+
+if mods["AircraftRealism"] then
+
+local arapi=require("__AircraftRealism__.api")
+  for i,entity in ipairs(Aircraft_List) do
+    local aircraft_grounded=data.raw["car"][entity]
+    local aircraft_flying=table.deepcopy(data.raw["car"][entity])
+    aircraft_flying.name=aircraft_flying.name .. "-flying"
+    aircraft_grounded["collision_box"]=data.raw["car"][entity]["selection_box"]
+    aircraft_grounded["render_layer"] = "object"
+    aircraft_flying.animation.layers[2]=nil --Shadows managed dynamically by AircraftRealism when in flight
+    aircraft_flying.collision_mask = { layers = {} } 
+    aircraft_grounded.friction=aircraft_grounded.friction*0.5
+    aircraft_flying.effectivity=aircraft_flying.effectivity/4
+    aircraft_flying.friction=aircraft_flying.friction/6
+    local braking_power_val,prefix=flib_data_util.get_energy_value(aircraft_flying.braking_power)
+    aircraft_flying.braking_power=tostring(braking_power_val/10) .. prefix
+    data:extend{aircraft_flying}
+
+    --Shadow sprites, copied from https://github.com/jaihysc/Factorio-AircraftRealism/blob/2.0.0/Docs/Api.md
+    local underscored_name=entity:gsub("-","_")
+    local spriteNames = {}
+    for i=0,35 do
+        local xPos = i % 6
+        local yPos = math.floor(i / 6)
+
+        spriteNames[i + 1] = underscored_name.."-shadow-" .. tostring(i)
+        local sprite = {
+            type = "sprite",
+            name = underscored_name.."-shadow-" .. tostring(i),
+            filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/"..underscored_name.."_spritesheet-shadow.png",
+
+            width = 224,
+            height = 224,
+            x = xPos * 224,
+            y = yPos * 224,
+            shift = util.by_pixel(0, 0),
+            scale = 1,
+
+            hr_version = {
+                filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/hr-"..underscored_name.."_spritesheet-shadow.png",
+
+                width = 448,
+                height = 448,
+                x = xPos * 448,
+                y = yPos * 448,
+                shift = util.by_pixel(0, 0),
+                scale = 0.5,
+            }
+        }
+        data:extend{sprite}
+    end
+    --End shadow sprites
+    arapi.register_plane({
+      grounded_name=data.raw["car"][entity].name,
+      airborne_name=aircraft_flying.name,
+      transition_speed_setting="transition-speed-" .. data.raw["car"][entity].name,
+      shadow_sprite=spriteNames,
+      --shadow_offset={4,4},
+      shadow_end_speed=settings.startup["shadow-end-animation-speed-".. data.raw["car"][entity].name].value/216
+    })
+    
+    
+    -- data:extend({
+    --   {
+    --     type = "double-setting",
+    --     name = "transition-speed-" .. data.raw.car[entity].name,
+    --     setting_type="runtime-global",
+    --     --minimum_value=0,
+    --     default_value=v_liftoff(data.raw["car"][entity],wing_area,C_lift)
+    --   }
+    -- })
+  end
+  
 end
 
 

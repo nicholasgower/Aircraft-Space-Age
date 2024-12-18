@@ -1,5 +1,5 @@
 --Only runs if Space Age is active
-if settings.startup["carbon-fiber-aircraft"].value==true then
+if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true then
   --local drag= {"450kW", "650kW", "2000kW", "850kW" }
   --local consumption= {"450kW", "1250kW", "850kW", "1850kW" }
   for i,entity in ipairs(Aircraft_List) do
@@ -15,6 +15,58 @@ if settings.startup["carbon-fiber-aircraft"].value==true then
     --data.raw["recipe"][new_plane.name.."-recycling"].localised_name=new_plane.localised_name
     --data.raw["recipe"][""]
     data:extend({new_plane})
+
+    if mods["AircraftRealism"] then 
+      local arapi=require("__AircraftRealism__.api")
+      local underscored_name=entity:gsub("-","_")
+      local spriteNames = {}
+      local aircraft_flying = table.deepcopy(data.raw["car"][entity .. "-flying"])
+      aircraft_flying.name=entity .. "-carbon-fiber-flying"
+      aircraft_flying.weight=new_plane.weight/2
+      aircraft_flying.max_health=new_plane.max_health/2
+      aircraft_flying.minable = {mining_time = 1, result = new_plane.name}
+      data:extend({aircraft_flying})
+    for i=0,35 do
+        local xPos = i % 6
+        local yPos = math.floor(i / 6)
+
+        spriteNames[i + 1] = underscored_name.."-shadow-" .. tostring(i)
+        local sprite = {
+            type = "sprite",
+            name = underscored_name.."-shadow-" .. tostring(i),
+            filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/"..underscored_name.."_spritesheet-shadow.png",
+
+            width = 224,
+            height = 224,
+            x = xPos * 224,
+            y = yPos * 224,
+            shift = util.by_pixel(0, 0),
+            scale = 1,
+
+            hr_version = {
+                filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/hr-"..underscored_name.."_spritesheet-shadow.png",
+
+                width = 448,
+                height = 448,
+                x = xPos * 448,
+                y = yPos * 448,
+                shift = util.by_pixel(0, 0),
+                scale = 0.5,
+            }
+        }
+      end
+        arapi.register_plane({
+          grounded_name=new_plane.name,
+          airborne_name=aircraft_flying.name,
+          transition_speed_setting="transition-speed-" .. data.raw["car"][new_plane.name].name,
+          shadow_sprite=spriteNames,
+          --shadow_offset={4,4},
+          shadow_end_speed=settings.startup["shadow-end-animation-speed-".. data.raw["car"][entity].name].value/216
+        })
+    end
+    
+
+
   end
   for i,entity in ipairs(Aircraft_List) do
    

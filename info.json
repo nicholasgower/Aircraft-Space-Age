@@ -1,14 +1,15 @@
 {
   "name": "Aircraft-space-age",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "factorio_version": "2.0",
   "title": "Aircraft (Updated for Space Age)",
   "author": "Thomasnotused, MeteorSwarm", 
   "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun! Now updated for 2.0 and Space Age.",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=120&t=18714",
   "dependencies": [
-    "base >= 2.0.0",
-    "? AircraftRealism >= 2.0.0",
+    "base >= 2.0.23",
+    "flib >= 0.15.0",
+    "? AircraftRealism >= 2.0.2",
     "? HelicopterRevival >= 0.3.0",
     "? space-age >= 2.0.0",
     "? bobplates >= 1.1.0",
