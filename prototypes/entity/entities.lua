@@ -158,6 +158,7 @@ local function add_recurrent_params(craft)
   craft.open_sound = { filename = "__base__/sound/car-door-open.ogg", volume = 0.7 }
   craft.close_sound = { filename = "__base__/sound/car-door-close.ogg", volume = 0.7 }
   craft.mined_sound = {filename = "__core__/sound/deconstruct-large.ogg",volume = 0.8}
+  craft.energy_source.fuel_categories=data.raw["car"]["car"].energy_source.fuel_categories
   craft.create_ghost_on_death = false
   --craft.alert_icon_shift = {0,-1}
   craft.minimap_representation = {
