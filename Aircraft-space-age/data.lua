@@ -12,3 +12,4 @@ if mods["space-age"] then
 end
 require("prototypes.recipe-updates") --Mod Compatibility
 require("prototypes.technologies-updates") --Mod Compatibility
+require("compat.planet-muluna") --Mod Compatibility

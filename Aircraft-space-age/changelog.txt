@@ -1,3 +1,10 @@
+---------------------------------------------------------------------------------------------------
+Version: 2.2.1
+Date: 1-1-2025
+  Compatibility:
+    - Fixed impossible tech tree requirement when planet-muluna is installed.
+    - Removed compatibility flags for Bob's mods.
+---------------------------------------------------------------------------------------------------
 Version: 2.2.0
 Date: 18-12-2024
   Changes:
@@ -7,15 +14,18 @@ Date: 18-12-2024
   Compatibility:
     - Added support for AircraftRealism
   Locale:
-    -Partially updated Chinese(Houraiji_Kyuusyou) and German(MeteorSwarm) localizations
+    - Partially updated Chinese(Houraiji_Kyuusyou) and German(MeteorSwarm) localizations
+---------------------------------------------------------------------------------------------------
 Version: 2.1.2
 Date: 15-11-2024
   Changes:
     - Locked aircraft stat rebalance behind disabling "Use Old 2.0.2 aircraft stats" startup setting, which is enabled by default.
+---------------------------------------------------------------------------------------------------
 Version: 2.1.1
 Date: 14-11-2024
   Changes:
     - Removed HelicopterRevival hard requirement. replacing it with a soft requirement.
+---------------------------------------------------------------------------------------------------
 Version: 2.1.0
 Date: 14-11-2024
   Changes:
