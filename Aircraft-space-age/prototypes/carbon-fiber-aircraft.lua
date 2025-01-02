@@ -34,34 +34,22 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
         local sprite = {
             type = "sprite",
             name = underscored_name.."-shadow-" .. tostring(i),
-            filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/"..underscored_name.."_spritesheet-shadow.png",
-
-            width = 224,
-            height = 224,
-            x = xPos * 224,
-            y = yPos * 224,
+            filename = "__Aircraft-space-age__/graphics/entity/" .. underscored_name .. "/hr-" .. underscored_name .. "_spritesheet-shadow.png",
+            width = 448,
+            height = 448,
+            x = xPos * 448,
+            y = yPos * 448,
             shift = util.by_pixel(0, 0),
-            scale = 1,
-
-            hr_version = {
-                filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/hr-"..underscored_name.."_spritesheet-shadow.png",
-
-                width = 448,
-                height = 448,
-                x = xPos * 448,
-                y = yPos * 448,
-                shift = util.by_pixel(0, 0),
-                scale = 0.5,
-            }
+            scale = 0.5,
         }
       end
         arapi.register_plane({
-          grounded_name=new_plane.name,
-          airborne_name=aircraft_flying.name,
+          grounded_name = new_plane.name,
+          airborne_name = aircraft_flying.name,
           transition_speed_setting="transition-speed-" .. data.raw["car"][new_plane.name].name,
-          shadow_sprite=spriteNames,
+          shadow_sprite = spriteNames,
           --shadow_offset={4,4},
-          shadow_end_speed=settings.startup["shadow-end-animation-speed-".. data.raw["car"][entity].name].value/216
+          shadow_end_speed = settings.startup["shadow-end-animation-speed-".. data.raw["car"][entity].name].value/216
         })
     end
     
@@ -93,14 +81,12 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     {type = "item", name = "submachine-gun", amount = 1},
   }
   data.raw["recipe"]["gunship-carbon-fiber"].ingredients = {
-    
-      {type = "item", name = "electric-engine-unit", amount = 64},
-      {type = "item", name = "carbon-fiber", amount = 200},
-      {type = "item", name = "iron-plate", amount = 400},
-      {type = "item", name = "electronic-circuit", amount = 40},
-      {type = "item", name = "submachine-gun", amount = 5},
-      {type = "item", name = "rocket-launcher", amount = 5}
-    
+    {type = "item", name = "electric-engine-unit", amount = 64},
+    {type = "item", name = "carbon-fiber", amount = 200},
+    {type = "item", name = "iron-plate", amount = 400},
+    {type = "item", name = "electronic-circuit", amount = 40},
+    {type = "item", name = "submachine-gun", amount = 5},
+    {type = "item", name = "rocket-launcher", amount = 5}
   }
   data.raw["recipe"]["jet-carbon-fiber"].ingredients = {
     {type = "item", name = "electric-engine-unit", amount = 256},
@@ -119,7 +105,7 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     {type = "item", name = "submachine-gun", amount = 15},
     {type = "item", name = "rocket-launcher", amount = 15},
   }
-  Aircraft_Tech_List={"cargo-planes","jets","gunships","flying-fortress"}
+  Aircraft_Tech_List = {"cargo-planes", "jets", "gunships", "flying-fortress"}
   for i,aircraft in ipairs(Aircraft_Tech_List) do
     
     local aircraft_tech
@@ -131,20 +117,20 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     -- else
      
     -- end
-    aircraft_tech=aircraft
-    local tech=table.deepcopy(data.raw["technology"][aircraft_tech])
-    tech.name=tech.name .. "-carbon-fiber"
-    tech.unit.count=tech.unit.count * 2
+    aircraft_tech = aircraft
+    local tech = table.deepcopy(data.raw["technology"][aircraft_tech])
+    tech.name = tech.name .. "-carbon-fiber"
+    tech.unit.count = tech.unit.count * 2
     table.insert(tech.unit.ingredients,{"agricultural-science-pack", 1})
     if aircraft ~= "flying-fortress" then 
       table.insert(tech.unit.ingredients,{"space-science-pack", 1})
     end
-    tech.prerequisites={aircraft_tech,"carbon-fiber"}
+    tech.prerequisites = {aircraft_tech, "carbon-fiber"}
 
     tech.effects = {
       {
         type = "unlock-recipe",
-        recipe=tech.effects[1].recipe .. "-carbon-fiber"
+        recipe = tech.effects[1].recipe .. "-carbon-fiber"
       }
     }
     data:extend({tech})

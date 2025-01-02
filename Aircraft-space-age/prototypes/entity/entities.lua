@@ -5,13 +5,12 @@ local ENTITYPATH = "__Aircraft-space-age__/graphics/entity/"
 
 local function addcommonanimlines(anim)
   for _,layer in pairs(anim.layers) do
-    layer.width, layer.height = 224, 224
-    layer.hr_version.width, layer.hr_version.height = 448, 448
-    layer.hr_version.scale = 0.5
-    layer.frame_count, layer.hr_version.frame_count = 1, 1
-    layer.direction_count, layer.hr_version.direction_count = 36, 36
-    layer.line_length, layer.hr_version.line_length = 6, 6
-    layer.max_advance, layer.hr_version.max_advance = 1, 1
+    layer.width, layer.height = 448, 448
+    layer.scale = 0.5
+    layer.frame_count = 1, 1
+    layer.direction_count = 36, 36
+    layer.line_length = 6, 6
+    layer.max_advance = 1, 1
   end
   return anim
 end
@@ -20,27 +19,17 @@ local function airplaneAnimation(name)
   local anim = {}
   anim.layers = {
     {
-      filename = ENTITYPATH .. name .. "/" .. name .. "_spritesheet.png",
+      filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet.png",
       shift = util.by_pixel(9, -10),
-      hr_version = {
-        filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet.png",
-        shift = util.by_pixel(9, -10),
-      }
     },
     {
-      filename = ENTITYPATH .. name .. "/" .. name .. "_spritesheet-shadow.png",
+      filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet-shadow.png",
       shift = util.by_pixel(54, 35),
       draw_as_shadow = true,
-      hr_version = {
-        filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet-shadow.png",
-        shift = util.by_pixel(54, 35),
-        draw_as_shadow = true,
-      }
     }
   }
   if mods["AircraftRealism"] then --Moves shadows closer to aircraft sprite when "AircraftRealism" is active, creating illusion of aircraft being closer to the ground 
-    anim.layers[2].shift=util.by_pixel(0, 0)
-    anim.layers[2].hr_version.shift=util.by_pixel(0, 0)
+    anim.layers[2].shift = util.by_pixel(0, 0)
   end
   addcommonanimlines(anim)
   return anim
@@ -50,14 +39,9 @@ local function airplaneLightAnimation(name)
   local anim = {}
   anim.layers = {
     {
-      filename = ENTITYPATH .. name .. "/" .. name .. "_spritesheet-light.png",
+      filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet-light.png",
       shift = util.by_pixel(9, -10),
       draw_as_light = true,
-      hr_version = {
-        filename = ENTITYPATH .. name .. "/hr-" .. name .. "_spritesheet-light.png",
-        shift = util.by_pixel(9, -10),
-        draw_as_light = true,
-      }
     }
   }
   addcommonanimlines(anim)
@@ -285,8 +269,8 @@ local cargo_plane = { -- Cargo Plane with Car sound
     breaking_speed = 0.15,
     rotation_speed = 0.006,
     weight = 3500,
-    allow_remote_driving=true,
-    trash_inventory_size=10,
+    allow_remote_driving = true,
+    trash_inventory_size = 10,
   }
 if settings.startup["use-old-stats"].value==true then
   --cargo_plane.inventory_size = 120
@@ -334,18 +318,18 @@ local jet = { -- Jet with Car sound
     rotation_speed = 0.01,
     --weight = 50000,
     weight = 500,
-    allow_remote_driving=true,
-    trash_inventory_size=10,
+    allow_remote_driving = true,
+    trash_inventory_size = 10,
 
   }
 
 if settings.startup["use-old-stats"].value==true then
-    --jet.inventory_size = 5
-    --jet.effectivity=0.9
-    --jet.consumption = "850kW"
-    --jet.acceleration_per_energy=0.8
-    --jet.weight=500
-  end
+  --jet.inventory_size = 5
+  --jet.effectivity=0.9
+  --jet.consumption = "850kW"
+  --jet.acceleration_per_energy=0.8
+  --jet.weight=500
+end
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -456,34 +440,22 @@ local arapi=require("__AircraftRealism__.api")
         local sprite = {
             type = "sprite",
             name = underscored_name.."-shadow-" .. tostring(i),
-            filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/"..underscored_name.."_spritesheet-shadow.png",
-
-            width = 224,
-            height = 224,
-            x = xPos * 224,
-            y = yPos * 224,
+            filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/hr-"..underscored_name.."_spritesheet-shadow.png",
+            width = 448,
+            height = 448,
+            x = xPos * 448,
+            y = yPos * 448,
             shift = util.by_pixel(0, 0),
-            scale = 1,
-
-            hr_version = {
-                filename = "__Aircraft-space-age__/graphics/entity/"..underscored_name.."/hr-"..underscored_name.."_spritesheet-shadow.png",
-
-                width = 448,
-                height = 448,
-                x = xPos * 448,
-                y = yPos * 448,
-                shift = util.by_pixel(0, 0),
-                scale = 0.5,
-            }
+            scale = 0.5,
         }
         data:extend{sprite}
     end
     --End shadow sprites
     arapi.register_plane({
-      grounded_name=data.raw["car"][entity].name,
-      airborne_name=aircraft_flying.name,
-      transition_speed_setting="transition-speed-" .. data.raw["car"][entity].name,
-      shadow_sprite=spriteNames,
+      grounded_name = data.raw["car"][entity].name,
+      airborne_name = aircraft_flying.name,
+      transition_speed_setting = "transition-speed-" .. data.raw["car"][entity].name,
+      shadow_sprite = spriteNames,
       --shadow_offset={4,4},
       shadow_end_speed=settings.startup["shadow-end-animation-speed-".. data.raw["car"][entity].name].value/216
     })
