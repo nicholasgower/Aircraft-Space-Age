@@ -1,23 +1,18 @@
 {
   "name": "Aircraft-space-age",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "factorio_version": "2.0",
-  "title": "Aircraft (Updated for Space Age)",
-  "author": "Thomasnotused, MeteorSwarm", 
-  "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun! Now updated for 2.0 and Space Age.",
+  "title": "Aircraft",
+  "author": "MeteorSwarm, Thomasnotused", 
+  "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun!",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=120&t=18714",
   "dependencies": [
     "base >= 2.0.23",
     "flib >= 0.15.0",
+    "? planet-muluna >= 1.9.0",
     "? AircraftRealism >= 2.0.2",
     "? HelicopterRevival >= 0.3.0",
     "? space-age >= 2.0.0",
-    "? bobplates >= 1.1.0",
-    "? bobelectronics >= 1.1.0",
-    "? boblibrary >= 1.1.0",
-    "? bobwarfare >= 1.1.0",
-    "? bobvehicleequipment >= 1.1.0",
-    "! traintunnels <= 0.0.11",
-    "! Aircraft"
+    "! traintunnels <= 0.0.11"
   ]
 }

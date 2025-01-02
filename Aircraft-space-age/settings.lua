@@ -120,7 +120,7 @@ data:extend(
 
 if mods["AircraftRealism"] then
   
-  require("util.aircraftRealism-util")
+  require("lib.aircraftRealism-util")
 
   local aircraft_list={"gunship","cargo-plane","jet","flying-fortress"}
   for i,aircraft in ipairs(aircraft_list) do
