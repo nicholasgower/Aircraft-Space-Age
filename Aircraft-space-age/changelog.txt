@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.2.2
+Date: 2-1-2025
+  Compatibility:
+    - Removed incompatibility flag for Aircraft in preparation for an update to the original Aircraft that points to this mod as a hard dependency.
+  Other:
+    - Removed all indications that this mod is an unofficial fork from the mod's header.
+---------------------------------------------------------------------------------------------------
 Version: 2.2.1
 Date: 1-1-2025
   Compatibility:
