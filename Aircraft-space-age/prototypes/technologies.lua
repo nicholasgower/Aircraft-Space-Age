@@ -35,7 +35,7 @@ data:extend({
   { -- Gunship
     type = "technology",
     name = "gunships",
-    icon = TECHPATH .. "gunship.png",
+    icon = TECHPATH .. "gunships.png",
     icon_size = 256,
     effects = {
       {
@@ -60,7 +60,7 @@ data:extend({
   { -- Cargo Plane
     type = "technology",
     name = "cargo-planes",
-    icon = TECHPATH .. "cargo_plane.png",
+    icon = TECHPATH .. "cargo-planes.png",
     icon_size = 256,
     effects = { 
       {
@@ -84,7 +84,7 @@ data:extend({
   { -- Jet
     type = "technology",
     name = "jets",
-    icon = TECHPATH .. "jet.png",
+    icon = TECHPATH .. "jets.png",
     icon_size = 256,
     effects = {
       {
@@ -113,7 +113,7 @@ data:extend({
   { -- Flying Fortress
     type = "technology",
     name = "flying-fortress",
-    icon = TECHPATH .. "flying_fortress.png",
+    icon = TECHPATH .. "flying-fortress.png",
     icon_size = 256,
     effects = { 
       {

@@ -1,14 +1,17 @@
+local TECHPATH = "__Aircraft-space-age__/graphics/technology/"
+
 --Only runs if Space Age is active
 if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true then
   --local drag= {"450kW", "650kW", "2000kW", "850kW" }
   --local consumption= {"450kW", "1250kW", "850kW", "1850kW" }
   for i,entity in ipairs(Aircraft_List) do
     local new_plane = table.deepcopy(data.raw["car"][entity])
-    local old_name=new_plane.name
+    local old_name = new_plane.name
     new_plane.name = new_plane.name .. "-carbon-fiber"
-    new_plane.weight=new_plane.weight/2
+    new_plane.icon = "__Aircraft-space-age__/graphics/icons/" .. old_name .. "_carbon_icon.png"
+    new_plane.weight = new_plane.weight/2
     --new_plane.weight=new_plane.weight/2
-    new_plane.max_health=new_plane.max_health/2
+    new_plane.max_health = new_plane.max_health/2
     new_plane.minable = {mining_time = 1, result = new_plane.name}
     --new_plane.localised_name = {{"item-name.carbon-fiber"},{"entity-name."..old_name}}
     --new_plane.localised_name = {{"carbon-fiber-aircraft"},{"item-name."..old_name}}
@@ -17,13 +20,13 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     data:extend({new_plane})
 
     if mods["AircraftRealism"] then 
-      local arapi=require("__AircraftRealism__.api")
-      local underscored_name=entity:gsub("-","_")
+      local arapi = require("__AircraftRealism__.api")
+      local underscored_name = entity:gsub("-","_")
       local spriteNames = {}
       local aircraft_flying = table.deepcopy(data.raw["car"][entity .. "-flying"])
-      aircraft_flying.name=entity .. "-carbon-fiber-flying"
-      aircraft_flying.weight=new_plane.weight/2
-      aircraft_flying.max_health=new_plane.max_health/2
+      aircraft_flying.name = entity .. "-carbon-fiber-flying"
+      aircraft_flying.weight = new_plane.weight/2
+      aircraft_flying.max_health = new_plane.max_health/2
       aircraft_flying.minable = {mining_time = 1, result = new_plane.name}
       data:extend({aircraft_flying})
     for i=0,35 do
@@ -59,6 +62,7 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
   for i,entity in ipairs(Aircraft_List) do
    
     local new_item = table.deepcopy(data.raw["item-with-entity-data"][entity])
+    new_item.icon = "__Aircraft-space-age__/graphics/icons/" .. new_item.name .. "_carbon_icon.png"
     new_item.name = new_item.name .. "-carbon-fiber"
     
     new_item.place_result = new_item.name
@@ -67,6 +71,7 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
   for i,entity in ipairs(Aircraft_List) do
    
     local new_recipe = table.deepcopy(data.raw["recipe"][entity])
+    new_recipe.icon = "__Aircraft-space-age__/graphics/icons/" .. new_recipe.name .. "_carbon_icon.png"
     new_recipe.name = new_recipe.name .. "-carbon-fiber"
     --new_recipe.enabled = true --For testing purposes
     new_recipe.results = {{type = "item", name = new_recipe.name, amount = 1}}
@@ -119,6 +124,7 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     -- end
     aircraft_tech = aircraft
     local tech = table.deepcopy(data.raw["technology"][aircraft_tech])
+    tech.icon = TECHPATH .. tech.name .. "-carbon.png"
     tech.name = tech.name .. "-carbon-fiber"
     tech.unit.count = tech.unit.count * 2
     table.insert(tech.unit.ingredients,{"agricultural-science-pack", 1})

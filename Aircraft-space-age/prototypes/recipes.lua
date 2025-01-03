@@ -3,9 +3,6 @@ data:extend({
     type = "recipe",
     name = "gunship",
     enabled = false,
-    icon = "__Aircraft-space-age__/graphics/icons/gunship_icon.png",
-    icon_size = 64,
-    
     energy_required = 10,
     ingredients = {
       {type = "item", name = "electric-engine-unit", amount = 64},
@@ -22,9 +19,6 @@ data:extend({
     type = "recipe",
     name = "cargo-plane",
     enabled = false,
-    icon = "__Aircraft-space-age__/graphics/icons/cargo_plane_icon.png",
-    icon_size = 64,
-    
     energy_required = 5,
     ingredients = {
       {type = "item", name = "electric-engine-unit", amount = 128},
@@ -40,9 +34,6 @@ data:extend({
     type = "recipe",
     name = "jet",
     enabled = false,
-    icon = "__Aircraft-space-age__/graphics/icons/jet_icon.png",
-    icon_size = 64,
-    
     energy_required = 10,
     ingredients = {
       {type = "item", name = "electric-engine-unit", amount = 256},
@@ -59,9 +50,6 @@ data:extend({
     type = "recipe",
     name = "flying-fortress",
     enabled = false,
-    icon = "__Aircraft-space-age__/graphics/icons/flying_fortress_icon.png",
-    icon_size = 64,
-    
     energy_required = 20,
     ingredients = {
       {type = "item", name = "electric-engine-unit", amount = 100},
