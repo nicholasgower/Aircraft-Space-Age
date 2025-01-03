@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.0
+Date: 3-1-2025
+  Graphics:
+    - Updated graphics for all aircraft entities. 
+    - Aircraft and carbon fiber aircraft now have updated and distinct icons.
+---------------------------------------------------------------------------------------------------
 Version: 2.2.2
 Date: 2-1-2025
   Compatibility:
