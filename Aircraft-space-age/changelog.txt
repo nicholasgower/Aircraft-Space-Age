@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.1
 Date: 30-3-2025
-  Balancing: 
+  Balancing:
     - Changed default fuel consumption multiplier on aircraft to 10.
     - Carbon fiber aircraft now consume half as much fuel as standard aircraft.
   Compatibility:
