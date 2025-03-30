@@ -103,7 +103,7 @@ data:extend(
     type = "double-setting",
     name = "fuel-consumption-multiplier",
     setting_type = "startup",
-    default_value = 1,
+    default_value = 10,
     order = "bk",
   },
   {

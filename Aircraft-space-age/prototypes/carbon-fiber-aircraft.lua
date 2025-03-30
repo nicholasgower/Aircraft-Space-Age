@@ -1,5 +1,5 @@
 local TECHPATH = "__Aircraft-space-age__/graphics/technology/"
-
+flib_data_util=require("__flib__.data-util")
 --Only runs if Space Age is active
 if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true then
   --local drag= {"450kW", "650kW", "2000kW", "850kW" }
@@ -9,6 +9,12 @@ if mods["space-age"] and settings.startup["carbon-fiber-aircraft"].value==true t
     local old_name = new_plane.name
     new_plane.name = new_plane.name .. "-carbon-fiber"
     new_plane.icon = "__Aircraft-space-age__/graphics/icons/" .. old_name .. "_carbon_icon.png"
+
+    local fuel_multiplier = 0.5
+    local val,suffix=flib_data_util.get_energy_value(new_plane.consumption)
+    new_plane.consumption=val*fuel_multiplier .. suffix
+    new_plane.effectivity=new_plane.effectivity/fuel_multiplier
+    
     new_plane.weight = new_plane.weight/2
     --new_plane.weight=new_plane.weight/2
     new_plane.max_health = new_plane.max_health/2
