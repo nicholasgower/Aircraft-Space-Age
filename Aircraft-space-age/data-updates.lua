@@ -1,3 +1,6 @@
+require("prototypes.recipe-updates") --Mod Compatibility
+require("prototypes.technologies-updates") --Mod Compatibility
+
 --Thanks to Arch666Angel for this snippet of code.
 --Updates equipment grids to support the various bob's vehicle grids, within reason.
 if settings.startup["non-combat-mode"].value == false then

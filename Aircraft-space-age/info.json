@@ -13,6 +13,11 @@
     "? AircraftRealism >= 2.0.2",
     "? HelicopterRevival >= 0.3.0",
     "? space-age >= 2.0.0",
-    "! traintunnels <= 0.0.11"
+    "! traintunnels <= 0.0.11",
+    "? bobplates >= 2.0.0",
+    "? bobelectronics >= 2.0.0",
+    "? boblibrary >= 2.0.0",
+    "? bobwarfare >= 2.0.0",
+    "? bobvehicleequipment >= 2.0.0"
   ]
 }
