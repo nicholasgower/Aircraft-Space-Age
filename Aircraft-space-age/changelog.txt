@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.2
+Date: 30-3-2025
+  Bugfixes:
+    - Fixed crash on loading Bob's mods without enabling carbon fiber aircraft.
+  Compatibility:
+    - When Space Age is enabled but Bob's mods are not, the Flying Fortress requires Space Age's Tungsten plates.
+---------------------------------------------------------------------------------------------------
 Version: 2.3.1
 Date: 30-3-2025
   Balancing:
