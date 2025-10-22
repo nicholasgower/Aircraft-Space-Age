@@ -1,11 +1,11 @@
 {
   "name": "Aircraft-space-age",
+  "title": "Aircraft",
+  "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun!",
+  "author": "MeteorSwarm, Thomasnotused", 
+  "homepage": "https://forums.factorio.com/viewtopic.php?f=120&t=18714",
   "version": "2.3.2",
   "factorio_version": "2.0",
-  "title": "Aircraft",
-  "author": "MeteorSwarm, Thomasnotused", 
-  "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun!",
-  "homepage": "https://forums.factorio.com/viewtopic.php?f=120&t=18714",
   "dependencies": [
     "base >= 2.0.23",
     "flib >= 0.15.0",
