@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.3
+Date: 2025-10-22
+  Changes:
+    - Added other files necessary to make automated releases function.
+    - Null release to trigger an automated release to the mod portal.
+    - Updated license.
+---------------------------------------------------------------------------------------------------
 Version: 2.3.2
 Date: 30-3-2025
   Bugfixes:
@@ -587,4 +594,4 @@ Date: 25-12-2015
 Version: 1.0.0
 Date: 25-12-2015
   Changes:
-    - Initial mod.
+    - Initial mod.

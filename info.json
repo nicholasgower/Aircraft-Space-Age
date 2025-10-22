@@ -1,8 +1,8 @@
 {
   "name": "Aircraft-space-age",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "title": "Aircraft",
-  "author": "MeteorSwarm", 
+  "author": "MeteorSwarm",
   "homepage": "https://github.com/nicholasgower/Aircraft-space-age",
   "description": "Adds 4 aircraft, each with their benefits and drawbacks, to allow for more biter-killing fun!",
   "factorio_version": "2.0",
