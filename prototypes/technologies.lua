@@ -247,7 +247,7 @@ data:extend({
 --Locks some recipes behind space sciences
 if mods["space-age"] then
   data.raw["technology"]["aircraft-energy-shield"].unit = {
-    count = 400,
+    count = 1000,
       ingredients = {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
@@ -326,7 +326,7 @@ if mods["space-age"] then
       time = 45,
   }
   --table.insert(data.raw["technology"]["afterburner"].prerequisites,"space-platform-thruster")
-  table.insert(data.raw["technology"]["space-platform-thruster"].prerequisites,"afterburner")
+
   --table.insert(data.raw["technology"]["afterburner"].prerequisites,"carbon-fiber")
 
   -- data.raw["technology"]["high-explosive-cannon-shells"].unit = {
@@ -347,43 +347,47 @@ if mods["space-age"] then
   
   --Adds "cargo planes" technology to rocket silo rereqs
   -- Reasoning: It makes sense for the progression to go from aircraft to spacecraft to me.
-  table.insert(data.raw["technology"]["rocket-silo"].prerequisites,"cargo-planes")
+  if settings.startup["aircraft-change-vanilla-tech-tree"].value == true then
+    table.insert(data.raw["technology"]["rocket-silo"].prerequisites,"cargo-planes")
+    table.insert(data.raw["technology"]["space-platform-thruster"].prerequisites,"afterburner")
+  end
+  
 
-  if settings.startup["experimental-features"].value==true then 
-  --   data:extend({
-  --     { -- Blimp
-  --   type = "technology",
-  --   name = "blimps",
-  --   icon = TECHPATH .. "flying_fortress.png",
-  --   icon_size = 256,
-  --   effects = { 
-  --     {
-  --       type = "unlock-recipe",
-  --       recipe="flying-fortress"
-  --     }
-  --     },
-  --   prerequisites = {"gunships", "cargo-planes", "jets", "artillery", "space-science-pack"},
-  --   unit = {
-  --     count = 3000,
-  --     ingredients = {
-  --       {"automation-science-pack", 1},
-  --       {"logistic-science-pack", 1},
-  --       {"chemical-science-pack", 1},
-  --       {"military-science-pack", 1},
-  --       {"utility-science-pack", 1},
-  --       {"production-science-pack", 1},
-  --       {"space-science-pack", 1}
-  --     },
-  --     time = 120
-  --   },
-  --   order = "c-h-f"
-  -- },
-  --   })
-  end
-  if settings.startup["carbon-fiber-aircraft"].value==true then 
-    --Aircraft_List
+  -- if settings.startup["experimental-features"].value==true then 
+  -- --   data:extend({
+  -- --     { -- Blimp
+  -- --   type = "technology",
+  -- --   name = "blimps",
+  -- --   icon = TECHPATH .. "flying_fortress.png",
+  -- --   icon_size = 256,
+  -- --   effects = { 
+  -- --     {
+  -- --       type = "unlock-recipe",
+  -- --       recipe="flying-fortress"
+  -- --     }
+  -- --     },
+  -- --   prerequisites = {"gunships", "cargo-planes", "jets", "artillery", "space-science-pack"},
+  -- --   unit = {
+  -- --     count = 3000,
+  -- --     ingredients = {
+  -- --       {"automation-science-pack", 1},
+  -- --       {"logistic-science-pack", 1},
+  -- --       {"chemical-science-pack", 1},
+  -- --       {"military-science-pack", 1},
+  -- --       {"utility-science-pack", 1},
+  -- --       {"production-science-pack", 1},
+  -- --       {"space-science-pack", 1}
+  -- --     },
+  -- --     time = 120
+  -- --   },
+  -- --   order = "c-h-f"
+  -- -- },
+  -- --   })
+  -- end
+  -- if settings.startup["carbon-fiber-aircraft"].value==true then 
+  --   --Aircraft_List
     
-  end
+  -- end
   
 end
 

@@ -108,9 +108,9 @@ data:extend(
   },
   {
     type = "bool-setting",
-    name = "experimental-features",
+    name = "aircraft-change-vanilla-tech-tree",
     setting_type = "startup",
-    default_value = false,
+    default_value = true,
     order = "bz",
   },
   
