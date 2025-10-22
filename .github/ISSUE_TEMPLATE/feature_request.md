@@ -2,14 +2,19 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
 
-**What's your idea?**
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-**Do you have any other options or variations you've considered?**
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
 
-**Mock-up art**
-You can post images, videos, or anything else here to help visualize your point. You can use a site like imgur.com to host them.
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.

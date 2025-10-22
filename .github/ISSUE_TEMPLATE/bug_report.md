@@ -2,23 +2,33 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: ''
+labels: bug
 assignees: ''
 
 ---
 
-**What is the bug?**
+**Factorio & Aircraft version number**
+Please post both the Factorio and Aircraft version numbers here. If relevant post the version number of other mods used.
 
-**How do I make it happen?**
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-**What's supposed to happen instead?**
+**To Reproduce**
+Steps to reproduce the behavior from a new save:
+1. Start a new save with Aircraft installed.
+2. Run command `....`
+3. Click on '....'
+4. Scroll down to '....'
+5. See error
 
-**Screenshots/Videos**
-Screenshots and/or videos are helpful in situations where it's a graphical bug, or if you can't copy/paste text directly from the source. You can host them using a site like imgur.com.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-**Versions**
- - Operating System:
- - Factorio Version:
- - Mod Version:
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-**Extra Info**
+**Additional context**
+Add any other context about the problem here.
+
+**Save file & log**
+Attach your save file and `factorio-current.log` file.
